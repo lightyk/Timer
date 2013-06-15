@@ -66,14 +66,6 @@
             android:layout_height="wrap_content"
             android:text="Press this button to set the timer" />
 
-        <Button
-            android:id="@+id/egg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="26dp"
-            android:text="Egg Timer"
-            android:width="10dp" />
-
         
         <Spinner
 	        android:id="@+id/spinner1"

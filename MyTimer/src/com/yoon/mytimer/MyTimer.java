@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -52,6 +54,8 @@ public class MyTimer extends Activity {//implements OnClickListener {
 	//for timer set
 	private Spinner s;
 	
+	//Sound
+	private SoundPool sp;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +98,7 @@ public class MyTimer extends Activity {//implements OnClickListener {
 					countDownTimer.cancel();
 					startB.setText("Start");
 				}
-				final long time = Long.parseLong(s.getSelectedItem().toString())*1000;
+				final long time = Long.parseLong(s.getSelectedItem().toString())*1000 * 60;
 				countDownTimer = new MalibuCountDownTimer(time, interval);
 				//if(startTimeR / (interval * 3600) >= 1) {
 				//text.setText("Time: " + String.valueOf(startTimeR / (interval * 3600)) + " : " + String.valueOf(((startTimeR / interval) % 3600) / 60) + " : " + String.valueOf(((startTimeR / interval) % 36000) % 60));
@@ -149,6 +153,9 @@ public class MyTimer extends Activity {//implements OnClickListener {
 		});
 		
 		addItemsOnSpinner();
+
+		
+		//sp.load(afd, R.id.)
 		//long time = (Long) s.getSelectedItem();
 
 		
@@ -168,14 +175,22 @@ public class MyTimer extends Activity {//implements OnClickListener {
 		// TODO Auto-generated method stub
 		s = (Spinner)this.findViewById(R.id.spinner1);
 		List<Integer> items = new ArrayList<Integer>();
-		for(int i =	5; i <= 60; i+=15) {
+		for(int i =	5; i <= 60; i+=5) {
 			items.add(i);
 		}
-		ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_dropdown_item_1line, items);
+		//calling customer xml file which is named as spinner_item.xml
+		ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.spinner_item, items);		
 		s.setAdapter(arrayAdapter);
 	}
-
-
+	
+	
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		System.exit(0);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
